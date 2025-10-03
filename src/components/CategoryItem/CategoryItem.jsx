@@ -1,5 +1,6 @@
 import React from "react";
 import "./CategoryItem.css";
+import { Link } from "react-router-dom";
 
 function CategoryItem({ itemName }) {
   return (
@@ -8,9 +9,7 @@ function CategoryItem({ itemName }) {
         id="category-item"
         className="category-item text-[1rem] sm:text-md md:text-lg lg:text-xl xl:text-2xl"
       >
-        <a id="href" href="productList.html">
-          {itemName}
-        </a>
+        <Link to='/products'>{itemName}</Link>
       </div>
     </>
   );
