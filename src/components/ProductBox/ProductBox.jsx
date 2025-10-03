@@ -5,7 +5,6 @@ function ProductBox({name,img,price}) {
     <div className="product-box m-4 bg-gray-700 rounded-xl">
       <Link
         to="/products/1"
-        target="_blank  "
         className=" inline-block  shadow-lg rounded p-4 "
       >
         <div>

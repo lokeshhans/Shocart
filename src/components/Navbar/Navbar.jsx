@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -79,9 +80,12 @@ function Navbar() {
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                   Orders
                 </a>
-                <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                <Link to='/login' className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                  Login
+                </Link>
+                <Link to='/signup' className="block w-full text-left px-4 py-2 hover:bg-gray-100">
                   Logout
-                </button>
+                </Link>
               </div>
             )}
           </div>
