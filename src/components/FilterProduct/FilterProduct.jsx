@@ -1,10 +1,12 @@
 import React from "react";
 
 function FilterProduct() {
+  const minPrice = [0, 10, 20, 50, 100, 200];
+  const maxPrice = [0, 10, 20, 50, 100, 200, 1000];
   return (
     <>
-      <div className="product-list-sidebar flex items-center flex-col gap-2">
-        <div className="product-list-search">Search products</div>
+      <div className="product-list-sidebar flex items-start pl-4  flex-col gap-2">
+        <div className="product-list-search ">Search products</div>
         <div className="product-list-search-items">
           <input
             type="search"
@@ -19,9 +21,27 @@ function FilterProduct() {
         >
           <a
             href="productList.html"
-            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-50 rounded- xl"
+            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-100 rounded- xl"
           >
             All Products
+          </a>
+          <a
+            href="productList.html"
+            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-50 rounded- xl"
+          >
+            Kitchen
+          </a>{" "}
+          <a
+            href="productList.html"
+            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-50 rounded- xl"
+          >
+            Shoes
+          </a>{" "}
+          <a
+            href="productList.html"
+            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-50 rounded- xl"
+          >
+            Clothes
           </a>
         </div>
         <div className="sidebar-title text-bold">Filter by Price</div>
@@ -29,48 +49,47 @@ function FilterProduct() {
           <select
             name="minPrice"
             id="minPrice"
-            className="border-1 rounded bg-gray-50"
+            className="border-1 rounded bg-gray-50 px-2 hover:cursor-pointer "
           >
-            <option value="0">0</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
+            {minPrice.map((optionValue) => (
+              <option  key={optionValue} value={optionValue}>
+                {optionValue}
+              </option>
+            ))}
           </select>
           <select
             name="maxPrice"
             id="maxPrice"
-            className="border-1 rounded bg-gray-50"
+            className="border-1 rounded bg-gray-50 px-2"
           >
-            <option value="0">0</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
-            <option value="1000">1000</option>
+            {maxPrice.map((optionValue) => (
+              <option key={optionValue} value={optionValue}>
+                {optionValue}
+              </option>
+            ))}
           </select>
         </div>
         <div className="product-price-filter flex gap-6">
-          <div>min price</div>
-          <div>max price</div>
+          <div>Min price</div>
+          <div>Max price</div>
         </div>
-        <div className="product-list-clear">
-          <button
-            id="searched"
-            className="bg-red-200 px-8 py-1 rounded-lg border-1"
-          >
-            search
-          </button>
-        </div>
-        <div className="product-list-clear">
-          <button
-            id="Clear"
-            className="bg-orange-400 px-8 py-1 rounded-lg border-1"
-          >
-            Clear Filter
-          </button>
+        <div className="btn flex gap-2">
+          <div className="product-list-clear ">
+            <button
+              id="searched"
+              className="bg-red-200 p-2  rounded-lg border-1"
+            >
+              search
+            </button>
+          </div>
+          <div className="product-list-clear">
+            <button
+              id="Clear"
+              className="bg-orange-400 p-2 rounded-lg border-1"
+            >
+              Clear Filter
+            </button>
+          </div>
         </div>
       </div>
     </>
