@@ -1,11 +1,10 @@
-import React from "react";
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
 
 function Home() {
   return (
     <>
-      <div id="container" className="container ">
-        <h2 className="text-center text-5xl font-bold mt-[4rem] tracking-[.7rem] px-8">
+      <div id="container" className="container bg-gray-400 min-h-[70vh]">
+        <h2 className="text-center text-5xl font-bold pt-[2rem] tracking-[.7rem] px-8">
           Welcome to Shop Cart
         </h2>
         <div

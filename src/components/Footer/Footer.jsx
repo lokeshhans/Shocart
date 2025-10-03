@@ -1,7 +1,7 @@
 import './Footer.css'
 function Footer() {
   return (
-    <footer className="foot  text-black mt-10 fixed bottom-0 w-full">
+    <footer className="foot  text-black  bottom-0 w-full">
       <div className="container mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Logo + About */}
         <div>
@@ -11,7 +11,7 @@ function Footer() {
               alt="Shop Cart Logo"
               className="w-12 h-12 rounded-xl"
             />
-            <h2 className="text-2xl font-bold">Shop Cart</h2>
+            <h2 className="text-2xl font-bold"><a href="/">Shop Cart</a></h2>
           </div>
           <p className="text-gray-700 text-sm">
             Your one-stop online shopping destination. Fast delivery, best prices, 
@@ -34,25 +34,9 @@ function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-gray-400 mt-6">
         <div className="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-200">
+          <p className="text-sm text-gray-700">
             © {new Date().getFullYear()} Shop Cart. All Rights Reserved.
           </p>
-
-          {/* Social Media */}
-          <div className="flex gap-4 mt-3 md:mt-0">
-            <a href="#" className="hover:text-gray-300">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" className="hover:text-gray-300">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#" className="hover:text-gray-300">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#" className="hover:text-gray-300">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-          </div>
         </div>
       </div>
     </footer>
