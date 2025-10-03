@@ -1,22 +1,22 @@
 import { Link } from "react-router-dom";
 
-function ProductBox() {
+function ProductBox({name,img,price}) {
   return (
     <div className="product-box m-4 bg-gray-700 rounded-xl">
       <Link
-        to="/productItem"
+        to="/products/1"
         target="_blank  "
         className=" inline-block  shadow-lg rounded p-4 "
       >
         <div>
           <img
-            src="https://www.godaddy.com/resources/wp-content/uploads/2025/02/ecommerce-featured-aO3ClS.tmp_.jpeg?size=3840x0"
+            src={img}
             className="w-30 h-30 rounded"
             alt=""
           />
         </div>
-        <div className="pro-detail text-center py-4">Some Product</div>
-        <div className="price text-center">&#8377;1000</div>
+        <div className="pro-detail text-center py-4">{name}</div>
+        <div className="price text-center">&#8377;{price}</div>
       </Link>
     </div>
   );

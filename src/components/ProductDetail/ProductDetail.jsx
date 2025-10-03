@@ -1,13 +1,13 @@
 import React from "react";
 
-function ProductDetail() {
+function ProductDetail({name,img}) {
   return (
     <div>
       <div className="product-detail-wrapper flex items-center justify-center p-4 px-6 gap-4 bg-gray-600 min-h-[70vh]">
         <div className="product-img w-[22%] my-10 flex items-center justify-center relative">
           <img
             id="product-img"
-            src="https://www.godaddy.com/resources/wp-content/uploads/2025/02/ecommerce-featured-aO3ClS.tmp_.jpeg?size=3840x0"
+            src={img}
             className="w-[90%] h-[60%] rounded"
             alt=""
           />
@@ -30,7 +30,7 @@ function ProductDetail() {
                 id="product-detail-title"
                 className="product-detail-title text-voilet-700 font-bold tracking-wider mt-2 text-sm md:text-md lg:text-lg xl:text-xl "
               >
-                Title
+                {name}
               </div>
               <div
                 id="product-detail-data"
