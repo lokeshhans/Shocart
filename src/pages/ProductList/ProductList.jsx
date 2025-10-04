@@ -9,7 +9,7 @@ import { useSearchParams } from "react-router-dom";
 
 function  ProductList() {
   const [products, setProducts] = useState(null);
-  const [query, setQuery] = useSearchParams();
+  const [query] = useSearchParams();
 
   const getAllProducts = async (category) => { 
     try {
@@ -25,7 +25,7 @@ function  ProductList() {
   useEffect(() => {
     getAllProducts(query.get('category'));
     // Fetch products from API and set state
-  }, []);
+  }, [query.get('category')]);
   return (
     <div className="bg-gray-600 min-h-[80vh]">
       <div id="container  ">
@@ -47,8 +47,8 @@ function  ProductList() {
               <div className="flex flex-wrap justify-start  gap-auto">
                 {
                   products && products.map((item) => <ProductBox
-                  name="item"
                   key={item.id}
+                  name={item.title}
                   price={item.price}
                   img={item.image }
                 />)

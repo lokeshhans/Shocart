@@ -1,24 +1,8 @@
-import { useEffect, useState } from "react";
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
-import axios from "axios";
-const BASE_URL = 'https://fakestoreapi.com/products';
+import useCategorys from "../../Hooks/useCategorys";
 function Home() {
-  const [categoryList, setCategoryList] = useState(null);
-  const getAllCategories = async () => {
-    try {
-        const response = await axios.get(`${BASE_URL}/categories`);
-        setCategoryList(response.data);
-    } catch (error) {
-        console.error('Error fetching categories:', error);
-        throw error;
-    }
-}
-    useEffect(() => {
-      getAllCategories().then((res) => {
-        console.log(res);
-      });
-    }, []);
-    
+  
+    const [categoryList] = useCategorys()
   return (
     
     <>

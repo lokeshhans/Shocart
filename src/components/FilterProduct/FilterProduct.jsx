@@ -1,24 +1,17 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-const BASE_URL = "https://fakestoreapi.com/products";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import useCategorys from "../../Hooks/useCategorys";
 
 function FilterProduct() {
   const minPrice = [0, 10, 20, 50, 100, 200];
   const maxPrice = [0, 10, 20, 50, 100, 200, 1000];
-  const [categoryList, setCategoryList] = useState(null);
-  const getAllCategories = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/categories`);
-      setCategoryList(response.data);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-      throw error;
-    }
-  };
-  useEffect(() => {
-    getAllCategories();
-  }, []);
+  const [query] = useSearchParams();
+  const [categoryList] = useCategorys()
+  const navigater = useNavigate()
+
+  function handlesearchparams(category){
+    navigater(`/products?category=${category}`)
+  }
+  
   return (
     <>
       <div className="product-list-sidebar flex items-start pl-4  flex-col gap-2">
@@ -36,14 +29,15 @@ function FilterProduct() {
           className="category-list flex flex-col mx-4 w-42 gap-1"
         >
           {categoryList &&
-            categoryList.map((item, index) => (
-              <Link
-                to="/products"
+            categoryList.map((category, index) => (
+              <a
+                onClick={()=>handlesearchparams(category)}
                 key={index}
+                category={category}
                 className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-100 rounded- xl"
               >
-                {item}
-              </Link>
+                {category}
+              </a>
             ))}
         </div>
         <div className="sidebar-title text-bold">Filter by Price</div>
