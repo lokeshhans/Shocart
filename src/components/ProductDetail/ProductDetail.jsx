@@ -1,25 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { getProductById } from "../../axios/ProductApi";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+const BASE_URL = 'https://fakestoreapi.com/products';
+
 
 function ProductDetail() {
-  const [ProductDetail, setProductDetail] = useState(null);
-  useEffect(() => (
-    getProductById(1).then((data)=> (
-      console.log(data),
-      setProductDetail(data)))
-  ), []);
+  const {id} = useParams()
+  // console.log("Route param ID:", id); // 👈 Debug
+  const [productDetail, setProductDetail] = useState('')
+  
+  async function getProduct(id)  {
+    const res = await axios.get(`${BASE_URL}/${id}`)
+    // console.log(res.data) 
+    setProductDetail(res.data)
+  }
+  useEffect(()=>{
+    getProduct(id)
+  },[id])
+  
   return (
-    // ProductDetail && ProductDetail.map(item =>{
-    //   <div key={item.id}>{item.name}</div>
-    // })
+    productDetail && 
     <div>
       <div className="product-detail-wrapper flex items-center justify-center p-4 px-6 gap-4 bg-gray-600 min-h-[70vh]">
         <div className="product-img w-[22%] my-10 flex items-center justify-center relative">
           <img
             id="product-img"
-            src={ProductDetail && ProductDetail.image}
+            src= {productDetail.image}
             className="w-[90%] h-[60%] rounded"
-            alt=""
+            alt="fail"
           />
         </div>
         <div
@@ -34,18 +43,18 @@ function ProductDetail() {
             <div
               id="product-price"
               className="product-price  text-sm md:text-md lg:text-lg xl:text-3xl"
-            >69</div>
+            >{productDetail.price}</div>
             <div id="product-detail" className="product-detail">
               <div
                 id="product-detail-title"
                 className="product-detail-title text-voilet-700 font-bold tracking-wider mt-2 text-sm md:text-md lg:text-lg xl:text-xl "
               >
-                electronocs
+                {ProductDetail.title}
               </div>
               <div
                 id="product-detail-data"
                 className="product-detail-data text-gray-400 text-[1rem] sm:text-[1rem] md:text-sm lg:text-md xl:text-lg mb-2   "
-              >Easy upgrade for faster boot up, shutdown, application load and response (As compared to 5400 RPM SATA 2.5” hard drive; Based on published specifications and internal benchmarking tests using PCMark vantage scores) Boosts burst write performance, making it ideal for typical PC workloads The perfect balance of performance and reliability Read/write speeds of up to 535MB/s/450MB/s (Based on internal testing; Performance may vary depending upon drive capacity, host device, OS and application.)</div>
+              >{productDetail.description}</div>
             </div>
           </div>
           <div className="button flex gap-2   flex-col ">

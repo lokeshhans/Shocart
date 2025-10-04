@@ -1,12 +1,9 @@
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
 import useCategorys from "../../Hooks/useCategorys";
 function Home() {
-  
-    const [categoryList] = useCategorys()
+  const [categoryList] = useCategorys()
   return (
-    
-    <>
-      <div id="container" className="container bg-gray-400 min-h-[70vh]">
+      <div id="container" className="container flex flex-col justify-center bg-gray-400 min-h-[70vh] ">
         <h2 className="text-center text-5xl font-bold pt-[2rem] tracking-[.7rem] px-8">
           Welcome to Shop Cart
         </h2>
@@ -27,7 +24,6 @@ function Home() {
           {/* <!-- To Do add catagory child --> */}
         </div>
       </div>
-    </>
   );
 }
 

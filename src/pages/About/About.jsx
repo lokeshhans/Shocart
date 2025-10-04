@@ -2,7 +2,7 @@
 function About() {
   return (
     <>
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 m-12">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 ">
         <article className="lg:col-span-2 bg-gray-500 p-8 rounded-2xl shadow-sm">
           <h2 className="text-2xl font-semibold mb-3">Who we are</h2>
           <p className="text-gray-700 leading-relaxed">

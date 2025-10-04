@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import Auth from "../../components/Auth/Auth";
 
 function Login() {
-  return (
-    <div>
+  return ( 
       <div className="login-page min-h-screen bg-gray-500">
         <h2 className="text-center text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold pt-[2rem] tracking-[.2rem]">
           Welcome to Shop Cart
@@ -26,7 +25,6 @@ function Login() {
           </span>
         </div>
       </div>
-    </div>
   );
 }
 

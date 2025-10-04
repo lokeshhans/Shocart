@@ -9,12 +9,12 @@ import Login from '../../pages/Login/Login'
 
 function MainRoutes() {
   return (
-    <Routes>
+    <Routes >
         <Route path="/" element={<Home/>}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/products' element={<ProductList />}/>
-        <Route path='/products/:1' element={<ProductDetail />}/>
+        <Route path='/products/:id' element={<ProductDetail />}/>
         <Route path='/about' element={<About/>}/>
         <Route path="*" element={<Error/>}/>
     </Routes>

@@ -2,30 +2,29 @@ import axios from "axios";
 import FilterProduct from "../../components/FilterProduct/FilterProduct";
 import ProductBox from "../../components/ProductBox/ProductBox";
 import { useState } from "react";
-const BASE_URL = 'https://fakestoreapi.com/products';
+const BASE_URL = "https://fakestoreapi.com/products";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-
-function  ProductList() {
+function ProductList() {
   const [products, setProducts] = useState(null);
   const [query] = useSearchParams();
 
-  const getAllProducts = async (category) => { 
+  const getAllProducts = async (category) => {
     try {
       const catQuery = category ? `${BASE_URL}/category/${category}` : BASE_URL;
-        const response = await axios.get(catQuery);
-        setProducts(response.data);
-        // console.log(response.data);
+      const response = await axios.get(catQuery);
+      setProducts(response.data);
+      // console.log(response.data);
     } catch (error) {
-        console.error('Error fetching products:', error);
-        throw error;
+      console.error("Error fetching products:", error);
+      throw error;
     }
-}
+  };
   useEffect(() => {
-    getAllProducts(query.get('category'));
+    getAllProducts(query.get("category"));
     // Fetch products from API and set state
-  }, [query.get('category')]);
+  }, [query.get("category")]);
   return (
     <div className="bg-gray-600 min-h-[80vh]">
       <div id="container  ">
@@ -35,7 +34,7 @@ function  ProductList() {
         <div className="flex p-4">
           <div className="product-list-wrapper bg-sky-50 rounded-xl py-4 text-uppercase   text-black">
             <div>
-              <FilterProduct   />
+              <FilterProduct />
             </div>
           </div>
           <div className="product-list-box   ">
@@ -45,16 +44,16 @@ function  ProductList() {
             >
               {/* ..................Product Items to be added here................. */}
               <div className="flex flex-wrap justify-start  gap-auto">
-                {
-                  products && products.map((item) => <ProductBox
-                  key={item.id}
-                  name={item.title}
-                  price={item.price}
-                  img={item.image }
-                />)
-
-                }
-                
+                {products &&
+                  products.map((item) => (
+                    <ProductBox
+                      itemId={item.id}
+                      key={item.id}
+                      name={item.title}
+                      price={item.price}
+                      img={item.image}
+                    />
+                  ))}
               </div>
             </div>
           </div>

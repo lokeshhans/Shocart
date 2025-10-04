@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-function ProductBox({name,img,price}) {
+function ProductBox({name,img,price,itemId}) {
   const itemName = name.split(' ').slice(0,3).join(' ')
   return (
     <div className="product-box m-4 bg-gray-700 rounded-xl">
       <Link
-        to="/products/1"
+        to={`/products/${itemId}`}
         className=" inline-block  shadow-lg rounded p-4 "
       >
         <div>
