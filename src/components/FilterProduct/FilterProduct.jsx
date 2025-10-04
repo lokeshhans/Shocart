@@ -1,8 +1,24 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+const BASE_URL = "https://fakestoreapi.com/products";
 
 function FilterProduct() {
   const minPrice = [0, 10, 20, 50, 100, 200];
   const maxPrice = [0, 10, 20, 50, 100, 200, 1000];
+  const [categoryList, setCategoryList] = useState(null);
+  const getAllCategories = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/categories`);
+      setCategoryList(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      throw error;
+    }
+  };
+  useEffect(() => {
+    getAllCategories();
+  }, []);
   return (
     <>
       <div className="product-list-sidebar flex items-start pl-4  flex-col gap-2">
@@ -19,30 +35,16 @@ function FilterProduct() {
           id="category-list"
           className="category-list flex flex-col mx-4 w-42 gap-1"
         >
-          <a
-            href="productList.html"
-            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-100 rounded- xl"
-          >
-            All Products
-          </a>
-          <a
-            href="productList.html"
-            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-50 rounded- xl"
-          >
-            Kitchen
-          </a>{" "}
-          <a
-            href="productList.html"
-            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-50 rounded- xl"
-          >
-            Shoes
-          </a>{" "}
-          <a
-            href="productList.html"
-            className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-50 rounded- xl"
-          >
-            Clothes
-          </a>
+          {categoryList &&
+            categoryList.map((item, index) => (
+              <Link
+                to="/products"
+                key={index}
+                className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-100 rounded- xl"
+              >
+                {item}
+              </Link>
+            ))}
         </div>
         <div className="sidebar-title text-bold">Filter by Price</div>
         <div className="product-price-filter flex gap-6">
@@ -52,7 +54,7 @@ function FilterProduct() {
             className="border-1 rounded bg-gray-50 px-2 hover:cursor-pointer "
           >
             {minPrice.map((optionValue) => (
-              <option  key={optionValue} value={optionValue}>
+              <option key={optionValue} value={optionValue}>
                 {optionValue}
               </option>
             ))}

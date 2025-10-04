@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Auth from "../../components/CategoryItem/Auth/Auth";
+import Auth from "../../components/Auth/Auth";
 
 function Login() {
   return (

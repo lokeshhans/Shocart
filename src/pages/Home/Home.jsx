@@ -1,7 +1,26 @@
+import { useEffect, useState } from "react";
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
-
+import axios from "axios";
+const BASE_URL = 'https://fakestoreapi.com/products';
 function Home() {
+  const [categoryList, setCategoryList] = useState(null);
+  const getAllCategories = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/categories`);
+        setCategoryList(response.data);
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        throw error;
+    }
+}
+    useEffect(() => {
+      getAllCategories().then((res) => {
+        console.log(res);
+      });
+    }, []);
+    
   return (
+    
     <>
       <div id="container" className="container bg-gray-400 min-h-[70vh]">
         <h2 className="text-center text-5xl font-bold pt-[2rem] tracking-[.7rem] px-8">
@@ -13,6 +32,10 @@ function Home() {
         >
           {/* <!-- To Do add catagory child --> */}
           <CategoryItem itemName="All Product" />
+          {categoryList && categoryList.map((item, index) => (
+            <CategoryItem key={index} itemName={item} filter={item} />
+          ))  }
+
         </div>
 
         <div className="catogry-title flex  text-3xl  items-cetner justify-center mt-[4rem]">

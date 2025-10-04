@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getProductById } from "../../axios/ProductApi";
 
-function ProductDetail({name,img}) {
+function ProductDetail() {
+  const [ProductDetail, setProductDetail] = useState(null);
+  useEffect(() => (
+    getProductById(1).then((data)=> (
+      console.log(data),
+      setProductDetail(data)))
+  ), []);
   return (
+    // ProductDetail && ProductDetail.map(item =>{
+    //   <div key={item.id}>{item.name}</div>
+    // })
     <div>
       <div className="product-detail-wrapper flex items-center justify-center p-4 px-6 gap-4 bg-gray-600 min-h-[70vh]">
         <div className="product-img w-[22%] my-10 flex items-center justify-center relative">
           <img
             id="product-img"
-            src={img}
+            src={ProductDetail && ProductDetail.image}
             className="w-[90%] h-[60%] rounded"
             alt=""
           />
@@ -20,7 +30,7 @@ function ProductDetail({name,img}) {
             <div
               id="product-name"
               className="product-name  text-black tracking-wider  text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl"
-            >Altu jalal tu aai bala ko tal tu </div>
+            ></div>
             <div
               id="product-price"
               className="product-price  text-sm md:text-md lg:text-lg xl:text-3xl"

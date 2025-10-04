@@ -1,7 +1,31 @@
+import axios from "axios";
 import FilterProduct from "../../components/FilterProduct/FilterProduct";
 import ProductBox from "../../components/ProductBox/ProductBox";
+import { useState } from "react";
+const BASE_URL = 'https://fakestoreapi.com/products';
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
-function ProductList() {
+
+function  ProductList() {
+  const [products, setProducts] = useState(null);
+  const [query, setQuery] = useSearchParams();
+
+  const getAllProducts = async (category) => { 
+    try {
+      const catQuery = category ? `${BASE_URL}/category/${category}` : BASE_URL;
+        const response = await axios.get(catQuery);
+        setProducts(response.data);
+        // console.log(response.data);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        throw error;
+    }
+}
+  useEffect(() => {
+    getAllProducts(query.get('category'));
+    // Fetch products from API and set state
+  }, []);
   return (
     <div className="bg-gray-600 min-h-[80vh]">
       <div id="container  ">
@@ -11,7 +35,7 @@ function ProductList() {
         <div className="flex p-4">
           <div className="product-list-wrapper bg-sky-50 rounded-xl py-4 text-uppercase   text-black">
             <div>
-              <FilterProduct />
+              <FilterProduct   />
             </div>
           </div>
           <div className="product-list-box   ">
@@ -21,11 +45,16 @@ function ProductList() {
             >
               {/* ..................Product Items to be added here................. */}
               <div className="flex flex-wrap justify-start  gap-auto">
-                <ProductBox
-                  name="Hello"
-                  price={1000}
-                  img="https://www.godaddy.com/resources/wp-content/uploads/2025/02/ecommerce-featured-aO3ClS.tmp_.jpeg?size=3840x0"
-                />
+                {
+                  products && products.map((item) => <ProductBox
+                  name="item"
+                  key={item.id}
+                  price={item.price}
+                  img={item.image }
+                />)
+
+                }
+                
               </div>
             </div>
           </div>
