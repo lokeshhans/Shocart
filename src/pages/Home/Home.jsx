@@ -1,5 +1,6 @@
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
 import useCategorys from "../../Hooks/useCategorys";
+import Loader from "../../components/Loader/Loader";
 function Home() {
   const [categoryList] = useCategorys()
   return (
@@ -13,6 +14,7 @@ function Home() {
         >
           {/* <!-- To Do add catagory child --> */}
           <CategoryItem itemName="All Product" />
+          {!categoryList && <Loader />}
           {categoryList && categoryList.map((item, index) => (
             <CategoryItem key={index} itemName={item} filter={item} />
           ))  }

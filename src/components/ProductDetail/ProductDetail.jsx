@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { BASE_URL } from "../../axios/ProductApi";
 
-const BASE_URL = 'https://fakestoreapi.com/products';
+
 
 
 function ProductDetail() {

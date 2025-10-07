@@ -1,0 +1,21 @@
+.loader{
+    height: 30vh;
+}
+.loader > div{
+    border: 5px solid black;
+    border-top: 5px solid white;
+    height: 4rem;
+    width: 4rem;
+    border-bottom: 5px solid white;
+    border-radius: 50%;
+    animation: spiner 2s linear infinite;
+
+}
+@keyframes spiner {
+    from{
+        transform: rotate(0deg);
+    }    
+    to{
+        transform: rotate(360deg);
+    }
+}

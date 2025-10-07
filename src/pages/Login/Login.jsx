@@ -11,14 +11,6 @@ function Login() {
           <h2 className="text-center text-2xl font-semibold mb-2">Login</h2>
           <div className="form flex items-start flex-col  gap-6 text-lg border-2 rounded-2xl p-4 bg-gray-50 ">
             <Auth />
-            <div className="login-btn flex items-center justify-center w-full ">
-              <button
-                type="submit"
-                className="bg-blue-500  px-2 rounded-lg border-2 border-black cursor-pointer  text-white"
-              >
-                login in
-              </button>
-            </div>
           </div>
           <span className="signup-btn text-gray-100 text-center w-full inline-block my-4 cursor-pointer text-sm sm:text-sm md:text-md lg:text-lg xl:text-xl">
             Don't have an account? <Link to="/signup">sign up </Link>here

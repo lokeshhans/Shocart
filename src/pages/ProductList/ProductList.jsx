@@ -2,10 +2,9 @@ import axios from "axios";
 import FilterProduct from "../../components/FilterProduct/FilterProduct";
 import ProductBox from "../../components/ProductBox/ProductBox";
 import { useState } from "react";
-const BASE_URL = "https://fakestoreapi.com/products";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-
+import { BASE_URL} from "../../axios/ProductApi";
 function ProductList() {
   const [products, setProducts] = useState(null);
   const [query] = useSearchParams();
