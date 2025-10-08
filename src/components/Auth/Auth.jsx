@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useImperativeHandle, useState } from "react";
 
-function Auth({onSubmit,resetForm}) {
+function Auth({ onSubmit }, ref) {
   const [formDetail, setFormDetail] = useState({
     user: "",
     email: "",
     password: "",
-    isLoading:false,
+    isLoading: false,
   });
 
-  useEffect(() => {
-    setFormDetail({
-    user: "",
-    email: "",
-    password: "",
-    isLoading:false,
-  })
-  }, [resetForm])
-  
   function updateUserName(updatedUserName) {
     setFormDetail({ ...formDetail, user: updatedUserName });
   }
@@ -26,11 +17,32 @@ function Auth({onSubmit,resetForm}) {
   function updatePassword(updatedPassword) {
     setFormDetail({ ...formDetail, password: updatedPassword });
   }
-  function handleSubmitForm(){
+  function handleSubmitForm() {
     setFormDetail({ ...formDetail, isLoading: true });
-    onSubmit(formDetail);
+    onSubmit(formDetail, resetForm);
   }
 
+  function resetForm() {
+    setFormDetail({ email: "", password: "", username: "", isLoading: false });
+  }
+
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        resetFormData: resetForm,
+      };
+    },
+    []
+  );
+  useEffect(() => {
+    setFormDetail({
+      user: "",
+      email: "",
+      password: "",
+      isLoading: false,
+    });
+  }, []);
   return (
     <>
       <div className="name border-2 p-2  rounded w-full bg-transparent text-black">
@@ -61,15 +73,21 @@ function Auth({onSubmit,resetForm}) {
         />
       </div>
       <div className="login-btn flex items-center justify-center w-full ">
-         <button
+        <button
           onClick={handleSubmitForm}
           type="button"
           className="bg-blue-500  px-2 rounded-lg border-2 border-black cursor-pointer  text-white"
           disabled={formDetail.isLoading}
         >
-          {(formDetail.isLoading) ? <span>lodaing...</span> : <span>SignUp</span>
-          }
-        </button> 
+          {formDetail.isLoading && (
+            <span
+              className="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          )}
+          {formDetail.isLoading ? "Loading..." : "Submit"}
+        </button>
       </div>
     </>
   );
