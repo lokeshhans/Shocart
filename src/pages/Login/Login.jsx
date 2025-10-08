@@ -3,11 +3,12 @@ import Auth from "../../components/Auth/Auth";
 import {  useRef } from "react";
 import axios from "axios";
 import { signin } from "../../axios/ProductApi";
-import Cookies from "js-cookie";
+import { useCookies } from "react-cookie";
 
 function Login() {
     const authRef = useRef(null)
     const navigator = useNavigate()
+    const [token, setToken ] = useCookies(['jwt-token'])
     async function onAuthFormSubmit(formDetails) {
         try {
             const response = await axios.post(signin(), {
@@ -15,7 +16,7 @@ function Login() {
                 email: formDetails.email,
                 password: formDetails.password
             }); 
-            Cookies.set('jwt-token', response.data.token);
+            setToken('jwt-token',response.data.token);
             navigator('/');
         } catch (error) {
             authRef.current.resetFormData();

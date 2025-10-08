@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isUserOpen, setIsUserOpen] = useState(false);
+  const [token, setToken, removeToken ] = useCookies(['jwt-token'])
+useEffect(()=>{
+  console.log(token, setToken, removeToken)
+},[token])
 
   return (
     <nav id="header" className=" text-black py-2 px-6">
@@ -50,44 +54,25 @@ function Navbar() {
               Cart
             </button>
             {isCartOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-lg shadow-lg z-50">
+              <div className="absolute right-0 mt-6 w-40 bg-white text-black rounded-lg shadow-lg z-50">
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                   View Cart
                 </a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                  Checkout
-                </a>
+                {/* ------- */}
+                {token['jwt-token'] ?   <Link onClick={()=> removeToken('jwt-token')} to='/signin' className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                  Logout
+                </Link>  : <Link to='/signin' className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                  Login
+                </Link>  }
               </div>
             )}
           </div>
 
           {/* User Info Dropdown */}
           <div className="relative">
-            <button
-              onClick={() => {
-                setIsUserOpen(!isUserOpen);
-                setIsCartOpen(false);
-              }}
-              className="hover:text-gray-200 flex items-center gap-1  w-[100%]  justify-end"
-            >
-              User Info
-            </button>
-            {isUserOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-lg shadow-lg z-50">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+            <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                   Profile
-                </a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                  Orders
-                </a>
-                <Link to='/login' className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                  Login
-                </Link>
-                <Link to='/signup' className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                  Logout
-                </Link>
-              </div>
-            )}
+            </a>
           </div>
         </div>
       </div>
