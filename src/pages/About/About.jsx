@@ -49,7 +49,7 @@ function About() {
             </h4>
             <ul className="mt-3 text-gray-700 space-y-2">
               <li>
-                <strong>Founded:</strong> 2019
+                <strong>Founded:</strong> 2022
               </li>
               <li>
                 <strong>Based in:</strong> Palwal
@@ -73,12 +73,12 @@ function About() {
 
           <div className="p-6 bg-white border rounded-2xl text-center">
             <h4 className="font-semibold mb-2">Ready to shop?</h4>
-            <a
-              href="/"
+            <Link
+              to="/"
               className="inline-block px-5 py-2 rounded-full bg-gray-600 text-white font-medium shadow"
             >
               Browse Products
-            </a>
+            </Link>
           </div>
         </aside>
       </section>

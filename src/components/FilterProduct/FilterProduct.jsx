@@ -4,7 +4,7 @@ import useCategorys from "../../Hooks/useCategorys";
 function FilterProduct() {
   const minPrice = [0, 10, 20, 50, 100, 200];
   const maxPrice = [0, 10, 20, 50, 100, 200, 1000];
-  const [query] = useSearchParams();
+  // const [query] = useSearchParams();
   const [categoryList] = useCategorys()
   const navigater = useNavigate()
 

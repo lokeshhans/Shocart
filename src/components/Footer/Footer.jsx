@@ -26,8 +26,8 @@ function Footer() {
           <ul className="space-y-2">
             <li><Link to="/" className="hover:text-gray-300">Home</Link></li>
             <li><Link to="/products" className="hover:text-gray-300">Shop</Link></li>
-            <li><a href="/about" className="hover:text-gray-300">About</a></li>
-            <li><a href="#" className="hover:text-gray-300">Contact <span>+91-18001801800</span> </a></li>
+            <li><Link to="/about" className="hover:text-gray-300">About</Link></li>
+            <li><Link to="tel:+9118001801800" className="hover:text-gray-300">Contact <span>+91-18001801800</span> </Link></li>
           </ul>
         </div>
       </div>

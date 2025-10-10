@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
 import "./Navbar.css";
+
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import axios from "axios";
+
+import UserContext from "../../context/UserContext";
+import CartContext from "../../context/CartContext";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [token, setToken, removeToken ] = useCookies(['jwt-token'])
-useEffect(()=>{
-  console.log(token, setToken, removeToken)
-},[token])
+  const [isUserOpen, setIsUserOpen] = useState(false);
+  const [token, setToken, removeToken] = useCookies(["jwt-token"]);
+  const { user, setUser } = useContext(UserContext);
+  const { cart } = useContext(CartContext);
+
+  useEffect(() => {}, [token]);
 
   return (
     <nav id="header" className=" text-black py-2 px-6">
@@ -21,9 +28,9 @@ useEffect(()=>{
             src="https://img.freepik.com/premium-vector/shopping-cart-logo-icon_567288-1132.jpg"
             alt="Shop Cart Logo"
           />
-          <a href="/" className="tracking-widest text-2xl font-semibold">
+          <Link to="/" className="tracking-widest text-2xl font-semibold">
             Shop Cart
-          </a>
+          </Link>
         </div>
 
         {/* Hamburger for Mobile */}
@@ -51,7 +58,7 @@ useEffect(()=>{
               }}
               className="hover:text-gray-200 flex items-center gap-1 w-[100%] justify-end"
             >
-              Cart
+              Cart {cart.products.length}
             </button>
             {isCartOpen && (
               <div className="absolute right-0 mt-6 w-40 bg-white text-black rounded-lg shadow-lg z-50">
@@ -59,20 +66,39 @@ useEffect(()=>{
                   View Cart
                 </a>
                 {/* ------- */}
-                {token['jwt-token'] ?   <Link onClick={()=> removeToken('jwt-token')} to='/signin' className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                  Logout
-                </Link>  : <Link to='/signin' className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                  Login
-                </Link>  }
+                {token["jwt-token"] ? (
+                  <Link
+                    onClick={() => {
+                      removeToken("jwt-token", { httpOnly: true });
+                      axios.get("http://localhost:8765/logout", {
+                        withCredentials: true,
+                      });
+                      setUser(null);
+                    }}
+                    to="/signin"
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Logout
+                  </Link>
+                ) : (
+                  <Link
+                    to="/signin"
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
             )}
           </div>
 
           {/* User Info Dropdown */}
           <div className="relative">
-            <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                  Profile
-            </a>
+            {user && (
+              <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+                {user.user}
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../axios/ProductApi";
+import CartContext from "../../context/CartContext";
 
 
 
@@ -10,6 +11,7 @@ function ProductDetail() {
   const {id} = useParams()
   // console.log("Route param ID:", id); // 👈 Debug
   const [productDetail, setProductDetail] = useState('')
+  const {cart, setCart } = useContext(CartContext)
   
   async function getProduct(id)  {
     const res = await axios.get(`${BASE_URL}/${id}`)
@@ -20,6 +22,11 @@ function ProductDetail() {
     getProduct(id)
   },[id])
   
+  function handleAddCart(){
+    console.log("calling add to cart")
+    setCart({...cart, products:[...cart.products,id]})
+    console.log(setCart)
+  }
   return (
     productDetail && 
     <div>
@@ -61,6 +68,7 @@ function ProductDetail() {
           <div className="button flex gap-2   flex-col ">
             <div className="login-btn flex items-center justify-center ">
               <button
+              onClick={handleAddCart}
                 type="submit"
                 className="bg-blue-500  rounded-lg border-2 border-black cursor-pointer text-white px-16 text-sm md: text-md lg:text-1xl xl:text-xl"
               >
