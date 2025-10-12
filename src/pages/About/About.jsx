@@ -1,4 +1,3 @@
-
 function About() {
   return (
     <>
@@ -6,10 +5,10 @@ function About() {
         <article className="lg:col-span-2 bg-gray-500 p-8 rounded-2xl shadow-sm">
           <h2 className="text-2xl font-semibold mb-3">Who we are</h2>
           <p className="text-gray-700 leading-relaxed">
-            Founded in <strong>2019</strong>, Shop Cart was created
-            with a single purpose — make quality products available to everyone
-            at fair prices. We started as a small marketplace and grew because
-            customers trusted our selection and service.
+            Founded in <strong>2019</strong>, Shop Cart was created with a
+            single purpose — make quality products available to everyone at fair
+            prices. We started as a small marketplace and grew because customers
+            trusted our selection and service.
           </p>
 
           <div className="mt-6">
@@ -21,7 +20,6 @@ function About() {
             <h3 className="text-lg font-medium">Our vision</h3>
             <p className="text-gray-700 mt-2">My vision</p>
           </div>
-
 
           <div className="mt-8">
             <h3 className="text-lg font-medium">Our story</h3>
@@ -44,9 +42,7 @@ function About() {
 
         <aside className="space-y-6">
           <div className="p-6 bg-gradient-to-br from-indigo-50 to-white rounded-2xl shadow-sm">
-            <h4 className="text-sm font-semibold text-gray-500">
-              Fast facts
-            </h4>
+            <h4 className="text-sm font-semibold text-gray-500">Fast facts</h4>
             <ul className="mt-3 text-gray-700 space-y-2">
               <li>
                 <strong>Founded:</strong> 2022
@@ -56,7 +52,10 @@ function About() {
               </li>
               <li>
                 <strong>Email:</strong>{" "}
-                <a className="text-indigo-400" href={`mailto:lokeshhanswork@gmail.com`}>
+                <a
+                  className="text-indigo-400"
+                  href={`mailto:lokeshhanswork@gmail.com`}
+                >
                   lokeshhanswork@gmail.com
                 </a>
               </li>

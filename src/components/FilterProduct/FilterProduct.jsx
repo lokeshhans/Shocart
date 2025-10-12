@@ -5,13 +5,13 @@ function FilterProduct() {
   const minPrice = [0, 10, 20, 50, 100, 200];
   const maxPrice = [0, 10, 20, 50, 100, 200, 1000];
   // const [query] = useSearchParams();
-  const [categoryList] = useCategorys()
-  const navigater = useNavigate()
+  const [categoryList] = useCategorys();
+  const navigater = useNavigate();
 
-  function handlesearchparams(category){
-    navigater(`/products?category=${category}`)
+  function handlesearchparams(category) {
+    navigater(`/products?category=${category}`);
   }
-  
+
   return (
     <>
       <div className="product-list-sidebar flex items-start pl-4  flex-col gap-2">
@@ -31,7 +31,7 @@ function FilterProduct() {
           {categoryList &&
             categoryList.map((category, index) => (
               <a
-                onClick={()=>handlesearchparams(category)}
+                onClick={() => handlesearchparams(category)}
                 key={index}
                 category={category}
                 className="p-2 text-black hover:text-gray-400 border-b-1 bg-sky-100 rounded- xl"

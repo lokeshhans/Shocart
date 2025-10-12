@@ -14,10 +14,16 @@ function Navbar() {
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [token, setToken, removeToken] = useCookies(["jwt-token"]);
   const { user, setUser } = useContext(UserContext);
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
 
   useEffect(() => {}, [token]);
 
+  function logout() {
+    removeToken("jwt-token", { httpOnly: true });
+    axios.get("http://localhost:8765/logout", { withCredentials: true });
+    setUser(null);
+    setCart(null);
+  }
   return (
     <nav id="header" className=" text-black py-2 px-6">
       <div className="container mx-auto flex items-center justify-between">
@@ -58,22 +64,23 @@ function Navbar() {
               }}
               className="hover:text-gray-200 flex items-center gap-1 w-[100%] justify-end"
             >
-              Cart {cart.products.length}
+              Cart {cart && cart.products && `(${cart.products.length})`}
             </button>
             {isCartOpen && (
               <div className="absolute right-0 mt-6 w-40 bg-white text-black rounded-lg shadow-lg z-50">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                  View Cart
-                </a>
+                {user && (
+                  <Link
+                    to={`/cart/${user.id}`}
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    View Cart
+                  </Link>
+                )}
                 {/* ------- */}
                 {token["jwt-token"] ? (
                   <Link
                     onClick={() => {
-                      removeToken("jwt-token", { httpOnly: true });
-                      axios.get("http://localhost:8765/logout", {
-                        withCredentials: true,
-                      });
-                      setUser(null);
+                      logout();
                     }}
                     to="/signin"
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -95,9 +102,9 @@ function Navbar() {
           {/* User Info Dropdown */}
           <div className="relative">
             {user && (
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                {user.user}
-              </a>
+              <Link href="/" className="block px-4 py-2 hover:bg-gray-100">
+                {user.username}
+              </Link>
             )}
           </div>
         </div>

@@ -4,14 +4,16 @@ import ProductBox from "../../components/ProductBox/ProductBox";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { BASE_URL} from "../../axios/ProductApi";
+import { url } from "../../axios/ProductApi";
 function ProductList() {
   const [products, setProducts] = useState(null);
   const [query] = useSearchParams();
 
   const getAllProducts = async (category) => {
     try {
-      const catQuery = category ? `${BASE_URL}/category/${category}` : BASE_URL;
+      const catQuery = category
+        ? `${BASE_URL}/category/${category}`
+        : `${url}/products`;
       const response = await axios.get(catQuery);
       setProducts(response.data);
       // console.log(response.data);
@@ -31,8 +33,8 @@ function ProductList() {
           All Products
         </h2>
         <div className="flex p-4">
-          <div className="product-list-wrapper bg-sky-50 rounded-xl py-4 text-uppercase   text-black">
-            <div>
+          <div className="product-list-wrapper bg-sky-50 rounded-xl py-4 text-uppercase h-fit   text-black">
+            <div className=" py-4 ">
               <FilterProduct />
             </div>
           </div>
@@ -42,7 +44,7 @@ function ProductList() {
               className="flex items-center justify-self-center   px-16"
             >
               {/* ..................Product Items to be added here................. */}
-              <div className="flex flex-wrap justify-start  gap-auto">
+              <div className="flex flex-wrap justify-center  gap-auto">
                 {products &&
                   products.map((item) => (
                     <ProductBox

@@ -13,7 +13,7 @@ function SignUp() {
         password: authArguments.password,
         email: authArguments.email,
       });
-      Navigate('/signin');
+      Navigate("/signin");
     } catch (error) {
       console.log("Error during signup:", error);
       resetForm();
